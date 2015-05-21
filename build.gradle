@@ -3,9 +3,11 @@ buildscript {
         maven { url "https://repo.spring.io/libs-release" }
         mavenLocal()
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.1.RELEASE")
+        classpath 'org.gradle.api.plugins:gradle-cargo-plugin:1.5.2'
     }
 }
 
@@ -13,6 +15,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'war'
+apply plugin: 'cargo'
 
 allprojects {
     apply plugin: 'java'
@@ -47,6 +50,31 @@ configurations {
     providedRuntime
 }
 
+cargo {
+    containerId = 'tomcat6x'
+    port = 8080
+
+    deployable {
+        context = 'ptsd-0.0.1'
+    }
+
+    remote {
+        hostname = 'localhost'
+        username = 'admin'
+        password = 'Agilexadmin99$'
+    }
+
+    local {
+        homeDir = file(System.getenv("CATALINA_HOME"))
+        outputFile = file('build/libs/output.log')
+        timeout = 60000
+
+        containerProperties {
+            property 'cargo.tomcat.ajp.port', 9099
+        }
+    }
+}
+
 dependencies {
  	compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.data:spring-data-mongodb:1.7.0.BUILD-SNAPSHOT")
@@ -57,6 +85,12 @@ dependencies {
     testCompile("junit:junit")
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 }
+
+task deployWar (dependsOn: [cargoUndeployRemote, cargoDeployRemote]) << {
+    println "Deploying war"
+}
+
+cargoDeployRemote.mustRunAfter cargoUndeployRemote
 
 task deploy (dependsOn: war){
     copy {
