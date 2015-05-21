@@ -26,7 +26,7 @@ public class PostController {
 		return postService.getAllPosts();
 	}
 	
-	@RequestMapping(value = "posts", method = RequestMethod.POST)
+	@RequestMapping(value = "posts", method = RequestMethod.PUT)
 	@ResponseBody
 	public HttpResponseMessage insertPost(@RequestBody Post post){
 		if(postService.save(post)){
