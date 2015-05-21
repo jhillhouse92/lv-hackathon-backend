@@ -58,6 +58,14 @@ dependencies {
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 }
 
+task deploy (dependsOn: war){
+    copy {
+        from "build/libs"
+        into System.getenv("CATALINA_HOME")+"/webapps"
+        include "*.war"
+    }
+}
+
 task wrapper(type: Wrapper) {
 	gradleVersion = '1.11'
 }
