@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.lv.hackathon.domain.User;
 
-@Repository
+@Repository("users")
 public class UserRepositoryImpl implements UserRepository {
 
 	@Autowired

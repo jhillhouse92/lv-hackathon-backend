@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lv.hackathon.domain.HttpResponseMessage;
@@ -19,6 +20,7 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(value ="user", method = RequestMethod.PUT)
+	@ResponseBody
 	public HttpResponseMessage createUser(@RequestBody User user){
 		if(userService.insertUser(user)){
 			return new HttpResponseMessage(HttpStatus.SUCCESSFUL);
@@ -28,11 +30,13 @@ public class UserController {
 	}
 	
 	@RequestMapping(value ="user/{dfn}", method = RequestMethod.GET)
+	@ResponseBody
 	public User getUser(@PathVariable String dfn){
 		return userService.getUser(dfn);
 	}
 	
 	@RequestMapping(value ="user/{dfn}", method = RequestMethod.PATCH)
+	@ResponseBody
 	public User updateUser(@RequestBody User user){
 		return userService.saveUser(user);
 	}
