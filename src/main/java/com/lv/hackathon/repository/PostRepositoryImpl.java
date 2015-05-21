@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.lv.hackathon.domain.Post;
@@ -25,8 +26,6 @@ public class PostRepositoryImpl implements PostRepository {
 
 	@Override
 	public List<Post> findAll() {
-		// TODO Auto-generated method stub
-		System.out.println("Repository Method Called");
 		return mongoTemplate.findAll(Post.class);
 	}
 
@@ -39,7 +38,16 @@ public class PostRepositoryImpl implements PostRepository {
 	@Override
 	public <S extends Post> S insert(S entity) {
 		// TODO Auto-generated method stub
-		return null;
+		long count = mongoTemplate.count(new Query(), Post.class);
+		mongoTemplate.insert(entity);
+		long countAfterInsert = mongoTemplate.count(new Query(), Post.class);
+		
+		//if insert was successful return the record
+		if(countAfterInsert > count){
+			return entity;
+		} else{
+			return null;
+		}
 	}
 
 	@Override

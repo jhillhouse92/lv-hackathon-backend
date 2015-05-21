@@ -7,4 +7,6 @@ import com.lv.hackathon.domain.Post;
 public interface PostService {
 
 	public List<Post> getAllPosts();
+
+	public Boolean save(Post p);
 }
