@@ -51,7 +51,7 @@ configurations {
 }
 
 cargo {
-    containerId = 'tomcat6x'
+    containerId = 'tomcat8x'
     port = 8080
 
     deployable {

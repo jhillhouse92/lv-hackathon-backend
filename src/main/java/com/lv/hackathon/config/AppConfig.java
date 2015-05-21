@@ -25,11 +25,13 @@ public class AppConfig extends AbstractMongoConfiguration {
 	@Override
 	public Mongo mongo() throws Exception {
 		// TODO Auto-generated method stub
-		return new MongoClient();
+		System.out.println("Mongo instance created!");
+		return new MongoClient("127.0.0.1");
 	}  
 	
 	@Override
 	protected String getMappingBasePackage() {
 		return "com.lv.hackathon.domain";
 	}
+	
 } 

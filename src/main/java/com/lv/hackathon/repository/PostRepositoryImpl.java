@@ -6,20 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.lv.hackathon.domain.Post;
 
+@Repository
 public class PostRepositoryImpl implements PostRepository {
-
-	private final MongoOperations operations;
 	
 	@Autowired
-	public PostRepositoryImpl(MongoOperations operations) {
-		// TODO Auto-generated constructor stub
-		this.operations = operations;
-	}
-	
+	MongoTemplate mongoTemplate;
+
 	@Override
 	public <S extends Post> List<S> save(Iterable<S> entites) {
 		// TODO Auto-generated method stub
@@ -29,7 +26,8 @@ public class PostRepositoryImpl implements PostRepository {
 	@Override
 	public List<Post> findAll() {
 		// TODO Auto-generated method stub
-		return operations.findAll(Post.class);
+		System.out.println("Repository Method Called");
+		return mongoTemplate.findAll(Post.class);
 	}
 
 	@Override
