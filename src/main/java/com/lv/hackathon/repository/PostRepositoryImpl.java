@@ -72,7 +72,7 @@ public class PostRepositoryImpl implements PostRepository {
 	@Override
 	public Post findOne(String id) {
 		// TODO Auto-generated method stub
-		return null;
+		return mongoTemplate.findOne(new Query().addCriteria(Criteria.where("_id").is(id)), Post.class);
 	}
 
 	@Override

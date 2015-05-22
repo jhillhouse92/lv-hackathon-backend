@@ -12,4 +12,6 @@ public interface PostService {
 
 	public List<Post> getAllPosts(List<String> ids);
 
+	public Post getPost(String postId);
+
 }

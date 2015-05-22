@@ -3,6 +3,7 @@ package com.lv.hackathon.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +27,11 @@ public class PostController {
 		return postService.getAllPosts();
 	}
 	
+	@RequestMapping(value ="/post/{postId}", method = RequestMethod.GET)
+	public Post getPost(@PathVariable String postId){
+		return postService.getPost(postId);
+	}
+	
 	@RequestMapping(value = "posts", method = RequestMethod.PUT)
 	@ResponseBody
 	public HttpResponseMessage insertPost(@RequestBody Post post){
@@ -35,4 +41,6 @@ public class PostController {
 			return new HttpResponseMessage(HttpStatus.SERVER_ERROR);
 		}
 	}
+	
+	
 }

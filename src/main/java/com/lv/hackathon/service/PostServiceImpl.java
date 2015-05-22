@@ -30,5 +30,10 @@ public class PostServiceImpl implements PostService {
 	public Boolean save(Post p){
 		return (null != postRepository.insert(p));
 	}
+	
+	@Override
+	public Post getPost(String postId) {
+		return postRepository.findOne(postId);
+	}
 
 }
