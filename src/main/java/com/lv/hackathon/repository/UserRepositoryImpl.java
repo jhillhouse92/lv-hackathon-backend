@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import com.lv.hackathon.domain.User;
@@ -118,6 +119,37 @@ public class UserRepositoryImpl implements UserRepository {
 	public void deleteAll() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public List<String> getUserFavorites(String dfn) {
+		// TODO Auto-generated method stub
+		User user = this.findOne(dfn);
+		return user.getFavorites();
+	}
+
+	@Override
+	public Boolean saveFavorite(String dfn, String id) {
+		// TODO Auto-generated method stub
+		try{
+			mongoTemplate.updateFirst(new Query().addCriteria(Criteria.where("dfn").is(dfn)), 
+					new Update().push("favorites", id), User.class);
+			return true;
+		} catch(Exception ex){
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean deleteFavorite(String dfn, String id) {
+		// TODO Auto-generated method stub
+		try{
+			mongoTemplate.updateFirst(new Query().addCriteria(Criteria.where("dfn").is(dfn)), 
+					new Update().pull("favorites", id), User.class);
+			return true;
+		} catch(Exception ex){
+			return false;
+		}
 	}
 
 }

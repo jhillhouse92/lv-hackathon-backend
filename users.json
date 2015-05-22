@@ -1,1 +1,1 @@
-{ "_id" : { "$oid" : "555e597341bd99acf968dbd1" }, "dfn" : "8", "handle" : "jhillhouse" }
+{ "_id" : { "$oid" : "555e597341bd99acf968dbd1" }, "dfn" : "8", "handle" : "jhillhouse", "favorites" : [ "555e04e241bd99acf968dbd0" ] }

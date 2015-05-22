@@ -6,4 +6,5 @@ import com.lv.hackathon.domain.Post;
 
 public interface PostRepository extends MongoRepository<Post, String> {
 
+	
 }

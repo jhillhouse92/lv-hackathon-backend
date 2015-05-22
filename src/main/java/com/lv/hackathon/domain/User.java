@@ -1,5 +1,7 @@
 package com.lv.hackathon.domain;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,6 +11,7 @@ public class User {
 	@Id private String id;
 	private String handle;
 	private String dfn;
+	private List<String> favorites;
 	
 	public String getId() {
 		return id;
@@ -32,5 +35,13 @@ public class User {
 	
 	public String getDfn(){
 		return this.dfn;
+	}
+	
+	public void setFavorites(List<String> posts){
+		this.favorites = posts;
+	}
+	
+	public List<String> getFavorites(){
+		return this.favorites;
 	}
 }

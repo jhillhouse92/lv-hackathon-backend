@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
@@ -83,7 +84,7 @@ public class PostRepositoryImpl implements PostRepository {
 	@Override
 	public Iterable<Post> findAll(Iterable<String> ids) {
 		// TODO Auto-generated method stub
-		return null;
+		return mongoTemplate.find(new Query().addCriteria(Criteria.where("_id").in(ids)), Post.class);
 	}
 
 	@Override

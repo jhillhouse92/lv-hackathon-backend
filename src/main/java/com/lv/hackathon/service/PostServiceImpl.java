@@ -21,6 +21,12 @@ public class PostServiceImpl implements PostService {
 	}
 	
 	@Override
+	public List<Post> getAllPosts(List<String> ids) {
+		// TODO Auto-generated method stub
+		return (List<Post>) postRepository.findAll(ids);
+	}
+	
+	@Override
 	public Boolean save(Post p){
 		return (null != postRepository.insert(p));
 	}

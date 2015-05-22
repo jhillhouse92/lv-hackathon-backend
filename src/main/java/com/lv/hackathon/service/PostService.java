@@ -9,4 +9,7 @@ public interface PostService {
 	public List<Post> getAllPosts();
 
 	public Boolean save(Post p);
+
+	public List<Post> getAllPosts(List<String> ids);
+
 }
