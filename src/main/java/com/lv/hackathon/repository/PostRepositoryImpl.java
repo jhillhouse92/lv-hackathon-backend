@@ -27,7 +27,9 @@ public class PostRepositoryImpl implements PostRepository {
 
 	@Override
 	public List<Post> findAll() {
-		return mongoTemplate.findAll(Post.class);
+		Query query = new Query();
+		query.with(new Sort(Sort.Direction.DESC, "date"));
+		return mongoTemplate.find(query, Post.class);
 	}
 
 	@Override

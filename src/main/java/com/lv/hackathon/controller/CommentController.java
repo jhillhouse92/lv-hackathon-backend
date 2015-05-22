@@ -27,7 +27,7 @@ public class CommentController {
 		return commentService.getComments(postId);
 	}
 	
-	@RequestMapping(value = "/{postId}/comment", method = RequestMethod.PUT)
+	@RequestMapping(value = "/comment", method = RequestMethod.PUT)
 	@ResponseBody
 	public HttpResponseMessage addComment(@RequestBody Comment comment){
 		if(commentService.save(comment)){
