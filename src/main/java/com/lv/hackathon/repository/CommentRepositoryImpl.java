@@ -40,7 +40,16 @@ public class CommentRepositoryImpl implements CommentRepository {
 	@Override
 	public <S extends Comment> S insert(S entity) {
 		// TODO Auto-generated method stub
-		return null;
+		long count = mongoTemplate.count(new Query(), Comment.class);
+		mongoTemplate.insert(entity);
+		long countAfterInsert = mongoTemplate.count(new Query(), Comment.class);
+		
+		//if insert was successful return the record
+		if(countAfterInsert > count){
+			return entity;
+		} else{
+			return null;
+		}
 	}
 
 	@Override

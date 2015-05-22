@@ -15,7 +15,7 @@ public class Comment {
 	private String author;
 	private AuthorType authorType;
 	private Date date;
-	private String postId;
+	private String post;
 	
 	public String getId() {
 		return id;
@@ -47,11 +47,11 @@ public class Comment {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public String getPostId() {
-		return postId;
+	public String getPost() {
+		return post;
 	}
-	public void setPostId(String postId) {
-		this.postId = postId;
+	public void setPost(String postId) {
+		this.post = postId;
 	}
 	
 	public enum AuthorType {

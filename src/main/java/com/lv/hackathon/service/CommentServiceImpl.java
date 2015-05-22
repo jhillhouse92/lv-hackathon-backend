@@ -20,4 +20,10 @@ public class CommentServiceImpl implements CommentService {
 		return commentRepository.getAllCommentsForPost(postId);
 	}
 
+	@Override
+	public Boolean save(Comment comment) {
+		// TODO Auto-generated method stub
+		return (null != commentRepository.insert(comment));
+	}
+
 }

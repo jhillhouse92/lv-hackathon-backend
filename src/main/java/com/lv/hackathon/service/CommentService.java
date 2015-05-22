@@ -7,4 +7,5 @@ import com.lv.hackathon.domain.Comment;
 public interface CommentService {
 
 	public List<Comment> getComments(String postId);
+	public Boolean save(Comment comment);
 }
